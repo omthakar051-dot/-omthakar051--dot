@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>evoyt — Every product, passport-ready</title>
+<meta name="description" content="evoyt is the digital product passport platform that makes manufacturers and brands EU-ready — capturing trustworthy supply-chain data and turning it into compliant, verifiable product passports.">
+<meta property="og:title" content="evoyt — Every product, passport-ready">
+<meta property="og:description" content="The digital product passport platform that makes manufacturers and brands EU-ready.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="evoyt-favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0A1A2F;--navy-700:#123055;--teal:#0FB5A6;--teal-600:#0C9488;--blue:#2F6BFF;
+  --surface:#F7F9FB;--border:#E7ECF2;--muted:#5B6B7F;--body:#0F1D2E;--white:#fff;
+  --shadow:0 1px 2px rgba(10,26,47,.06),0 10px 30px rgba(10,26,47,.07);
+  --radius:16px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;color:var(--body);background:var(--white);line-height:1.6;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,.disp{font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em;color:var(--ink)}
+.mono{font-family:'JetBrains Mono',monospace}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:13px 24px;border-radius:11px;font-weight:600;font-size:15px;cursor:pointer;border:none;transition:transform .15s ease,background .15s ease}
+.btn:hover{transform:translateY(-1px)}
+.btn-primary{background:var(--teal);color:#04211d}
+.btn-primary:hover{background:var(--teal-600);color:#fff}
+.btn-dark{background:var(--ink);color:#fff}
+.btn-ghost{background:transparent;border:1.5px solid var(--border);color:var(--ink)}
+.btn-white{background:#fff;color:var(--ink)}
+.eyebrow{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--teal)}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:70px}
+.brand{display:flex;align-items:center;gap:11px}
+.brand svg{width:38px;height:38px}
+.brand span{font-family:'Space Grotesk';font-weight:700;font-size:24px;letter-spacing:-.03em;color:var(--ink)}
+.navlinks{display:flex;gap:28px;font-size:15px;font-weight:500;color:#33475b}
+.navlinks a:hover{color:var(--teal-600)}
+.navcta{display:flex;gap:12px;align-items:center}
+.menu-toggle{display:none;background:none;border:none;font-size:24px;cursor:pointer;color:var(--ink)}
+@media(max-width:900px){.navlinks,.navcta .ghost{display:none}}
+
+/* HERO */
+.hero{background:linear-gradient(165deg,var(--ink),var(--navy-700) 72%);color:#fff;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-160px;top:-140px;width:520px;height:520px;border-radius:50%;background:radial-gradient(circle,rgba(15,181,166,.32),transparent 62%)}
+.hero-inner{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center;padding-top:78px;padding-bottom:84px;position:relative;z-index:2}
+.hero h1{color:#fff;font-size:52px;line-height:1.06;margin:18px 0 16px}
+.hero p.lead{color:#B9C6D6;font-size:19px;max-width:520px;margin-bottom:28px}
+.hero .btnrow{display:flex;gap:14px;flex-wrap:wrap}
+.hero .assure{margin-top:20px;color:#8fa4bc;font-size:13.5px}
+/* passport card mock */
+.pp{background:#fff;border-radius:20px;box-shadow:0 30px 60px rgba(0,0,0,.35);overflow:hidden;transform:rotate(1.5deg)}
+.pp-top{background:var(--ink);color:#fff;padding:16px 18px;display:flex;align-items:center;justify-content:space-between}
+.pp-top .qr{width:44px;height:44px;border-radius:8px;background:
+  conic-gradient(from 0deg,#0FB5A6 25%,#0A1A2F 0 50%,#0FB5A6 0 75%,#0A1A2F 0);opacity:.9}
+.pp-body{padding:18px 18px 20px}
+.pp-row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--border);font-size:13.5px}
+.pp-row .k{color:var(--muted)} .pp-row .v{font-weight:600;color:var(--ink);font-family:'JetBrains Mono';font-size:12.5px}
+.pp-badge{display:inline-flex;align-items:center;gap:6px;margin-top:14px;background:#E7F8F5;color:var(--teal-600);font-weight:600;font-size:12.5px;padding:6px 12px;border-radius:999px}
+
+/* TRUST STRIP */
+.trust{border-bottom:1px solid var(--border);background:var(--surface)}
+.trust .wrap{display:flex;align-items:center;gap:26px;justify-content:center;flex-wrap:wrap;padding:18px 28px;color:#6b7c90;font-size:13px;font-weight:600;letter-spacing:.04em}
+.trust b{color:var(--ink)}
+
+/* SECTIONS */
+section.blk{padding:76px 0}
+.center{text-align:center;max-width:680px;margin:0 auto 46px}
+.center h2{font-size:34px;margin:10px 0 12px}
+.center p{color:var(--muted);font-size:17px}
+.cards{display:grid;gap:22px}
+.c3{grid-template-columns:repeat(3,1fr)}
+.c2{grid-template-columns:1fr 1fr}
+.c4{grid-template-columns:repeat(4,1fr)}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:26px;box-shadow:var(--shadow)}
+.card h3{font-size:19px;margin-bottom:8px}
+.card p{font-size:14.5px;color:#455366}
+.icon{width:44px;height:44px;border-radius:12px;background:#E7F8F5;display:flex;align-items:center;justify-content:center;margin-bottom:14px;color:var(--teal-600)}
+.step-n{font-family:'Space Grotesk';font-weight:700;color:var(--teal);font-size:15px}
+
+/* PROBLEM band */
+.band{background:var(--surface)}
+.stat{font-family:'Space Grotesk';font-weight:700;font-size:40px;color:var(--ink)}
+.stat small{display:block;font-family:'Inter';font-weight:500;font-size:14px;color:var(--muted);margin-top:4px}
+
+/* AUDIENCE */
+.aud{border-radius:20px;padding:32px;color:#fff;position:relative;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;text-align:left;box-shadow:var(--shadow)}
+.aud.exp{background:linear-gradient(150deg,var(--ink),var(--navy-700))}
+.aud.brand{background:linear-gradient(150deg,#0C9488,#0FB5A6)}
+.aud h3,.aud .lead2,.aud ul{width:100%}
+.aud h3{color:#fff;font-size:22px;margin-bottom:8px}
+.aud .lead2{font-size:15px;color:rgba(255,255,255,.9)}
+.aud ul{margin:18px 0 26px 2px;font-size:14.5px;color:rgba(255,255,255,.92);list-style:none}
+.aud ul li{margin:0;padding:9px 0 9px 26px;position:relative;border-top:1px solid rgba(255,255,255,.14)}
+.aud ul li:first-child{border-top:none}
+.aud ul li:before{content:"";position:absolute;left:0;top:15px;width:14px;height:8px;border-left:2px solid rgba(255,255,255,.85);border-bottom:2px solid rgba(255,255,255,.85);transform:rotate(-45deg)}
+.aud .btn{align-self:flex-start;margin-top:auto}
+
+/* SECTORS */
+.sector{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid var(--border);border-radius:14px;padding:20px;box-shadow:var(--shadow)}
+.sector .tag{font-size:11px;font-weight:700;color:var(--teal-600);background:#E7F8F5;padding:3px 9px;border-radius:999px}
+
+/* CHECKER */
+.checker{background:linear-gradient(160deg,var(--ink),var(--navy-700));border-radius:22px;padding:40px;color:#fff}
+.checker h2{color:#fff;font-size:28px;margin-bottom:8px}
+.checker p.sub{color:#B9C6D6;margin-bottom:22px}
+.ck-form{display:flex;gap:12px;flex-wrap:wrap}
+.ck-form select,.ck-form input{padding:13px 15px;border-radius:11px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:15px;font-family:'Inter';min-width:190px}
+.ck-form select option{color:#0A1A2F}
+.ck-result{margin-top:22px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:22px 24px;font-size:15px;display:none}
+.ck-result.show{display:block;animation:ckin .35s ease}
+@keyframes ckin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.ck-head{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:6px}
+.ck-pill{font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:5px 12px;border-radius:999px;background:#DC2626;color:#fff}
+.ck-pill.amber{background:#D97706}.ck-pill.grey{background:#475569}
+.ck-deadline{font-size:13.5px;color:#B9C6D6;font-family:'JetBrains Mono'}
+.ck-count{display:flex;align-items:baseline;gap:12px;margin:6px 0 16px}
+.ck-num{font-family:'Space Grotesk';font-weight:700;font-size:56px;line-height:1;color:#fff}
+.ck-num.danger{color:#FF6B6B}.ck-num.warn{color:#FFB84D}
+.ck-lbl{font-size:14px;color:#B9C6D6}
+.ck-bar{position:relative;height:12px;border-radius:999px;background:rgba(255,255,255,.12);overflow:visible;margin-top:6px}
+.ck-bar-fill{position:absolute;left:0;top:0;bottom:0;border-radius:999px;background:linear-gradient(90deg,#DC2626,#F59E0B);width:0;transition:width .6s ease}
+.ck-bar-marker{position:absolute;top:-4px;width:3px;height:20px;background:#5EE6D5;border-radius:2px;right:0}
+.ck-bar-legend{display:flex;justify-content:space-between;font-size:11.5px;color:#8fa4bc;margin-top:8px}
+.ck-msg{margin:16px 0 14px;font-size:15px;color:#E4ECF5;line-height:1.55}
+.ck-msg b{color:#5EE6D5}
+.ck-result b{color:#5EE6D5}
+
+/* PRICING */
+.price{grid-template-columns:repeat(4,1fr)}
+.pcard{background:#fff;border:1px solid var(--border);border-radius:16px;padding:24px;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.pcard.feat{border:2px solid var(--teal);position:relative}
+.pcard.feat:before{content:"Most popular";position:absolute;top:-11px;left:24px;background:var(--teal);color:#04211d;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px}
+.pcard .pt{font-family:'Space Grotesk';font-weight:600;font-size:17px;color:var(--ink)}
+.pcard .pp2{font-family:'Space Grotesk';font-weight:700;font-size:30px;color:var(--ink);margin:10px 0 2px}
+.pcard .pp2 small{font-size:13px;font-weight:500;color:var(--muted)}
+.pcard ul{list-style:none;margin:14px 0 20px;font-size:13.5px;color:#455366}
+.pcard ul li{padding:6px 0;border-bottom:1px dashed var(--border)}
+.pcard .btn{margin-top:auto;justify-content:center}
+
+/* FINAL CTA */
+.final{background:linear-gradient(160deg,var(--ink),var(--navy-700));color:#fff;border-radius:24px;padding:56px;text-align:center;position:relative;overflow:hidden}
+.final:after{content:"";position:absolute;left:-100px;bottom:-140px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(15,181,166,.3),transparent 62%)}
+.final h2{color:#fff;font-size:34px;margin-bottom:12px;position:relative}
+.final p{color:#B9C6D6;max-width:520px;margin:0 auto 26px;position:relative}
+.final .btnrow{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;position:relative}
+
+/* FOOTER */
+footer{background:var(--ink);color:#9fb0c4;padding:56px 0 34px;font-size:14px}
+.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:30px;margin-bottom:34px}
+footer h5{color:#fff;font-size:13px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:14px;font-family:'Inter'}
+footer a{display:block;padding:5px 0;color:#9fb0c4}
+footer a:hover{color:var(--teal)}
+.fbrand span{font-family:'Space Grotesk';font-weight:700;font-size:22px;color:#fff}
+.fbot{border-top:1px solid rgba(255,255,255,.1);padding-top:20px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:12.5px;color:#7488a0}
+
+/* FINAL inline email form */
+.final-form{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;max-width:480px;margin:0 auto;position:relative;z-index:2}
+.final-form input{flex:1;min-width:220px;padding:14px 16px;border-radius:11px;border:1px solid rgba(255,255,255,.22);background:rgba(255,255,255,.1);color:#fff;font-size:15px;font-family:'Inter'}
+.final-form input::placeholder{color:#9fb3c9}
+.final-form input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,181,166,.25)}
+.final-alt{margin-top:16px;position:relative;z-index:2}
+.final-alt a{color:#B9C6D6;font-size:14px;text-decoration:underline}
+
+/* LEAD MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(6,15,28,.62);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:100;padding:20px}
+.modal-overlay.show{display:flex}
+.modal-card{background:#fff;border-radius:20px;max-width:540px;width:100%;padding:32px;box-shadow:0 30px 80px rgba(0,0,0,.45);position:relative;max-height:92vh;overflow:auto;animation:ckin .3s ease}
+.modal-close{position:absolute;top:14px;right:16px;background:none;border:none;font-size:26px;line-height:1;color:var(--muted);cursor:pointer}
+.modal-progress{height:5px;background:var(--border);border-radius:999px;overflow:hidden;margin:4px 0 22px}
+.modal-progress span{display:block;height:100%;background:var(--teal);width:33%;transition:width .35s ease;border-radius:999px}
+.m-eyebrow{font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--teal-600)}
+.m-title{font-family:'Space Grotesk';font-weight:700;font-size:23px;color:var(--ink);margin:8px 0 6px}
+.m-sub{color:var(--muted);font-size:14.5px;margin-bottom:20px}
+.m-field{margin-bottom:14px}
+.m-field label{display:block;font-size:13px;font-weight:600;color:var(--ink);margin-bottom:6px}
+.m-input{width:100%;padding:12px 14px;border:1px solid var(--border);border-radius:10px;font-size:15px;font-family:'Inter';color:var(--body)}
+.m-input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,181,166,.15)}
+.sector-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sector-btn{border:1.5px solid var(--border);border-radius:12px;padding:14px 16px;text-align:left;cursor:pointer;background:#fff;transition:all .15s}
+.sector-btn:hover{border-color:var(--teal);background:var(--surface)}
+.sector-btn b{display:block;font-family:'Space Grotesk';color:var(--ink);font-size:15px;margin-bottom:2px}
+.sector-btn small{color:var(--muted);font-size:12px}
+.q-block{margin-bottom:16px}
+.q-block .ql{font-size:14px;font-weight:600;color:var(--ink);margin-bottom:8px}
+.chipset{display:flex;flex-wrap:wrap;gap:8px}
+.qchip{border:1.5px solid var(--border);background:#fff;border-radius:999px;padding:8px 14px;font-size:13.5px;cursor:pointer;transition:all .15s;font-weight:500;color:#33475b;user-select:none}
+.qchip:hover{border-color:var(--teal)}
+.qchip.sel{background:var(--ink);color:#fff;border-color:var(--ink)}
+.m-actions{display:flex;justify-content:space-between;align-items:center;margin-top:22px;gap:12px}
+.m-back{background:none;border:none;color:var(--muted);font-size:14px;cursor:pointer;font-family:'Inter'}
+.m-err{color:#DC2626;font-size:13px;margin-top:6px;min-height:16px}
+.m-success{text-align:center;padding:8px 0}
+.m-success .tick{width:58px;height:58px;border-radius:50%;background:#E7F8F5;color:var(--teal-600);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 16px;font-weight:700}
+
+/* ---- ANIMATION ---- */
+.card,.sector,.aud{transition:transform .25s cubic-bezier(.16,.8,.3,1),box-shadow .25s ease}
+header{transition:box-shadow .25s ease}
+header.scrolled{box-shadow:0 6px 24px rgba(10,26,47,.09)}
+@media (prefers-reduced-motion: no-preference){
+  /* scroll reveal */
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s cubic-bezier(.16,.8,.3,1),transform .7s cubic-bezier(.16,.8,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+  /* hero staggered entrance */
+  .hero .eyebrow{animation:heroUp .7s .05s both}
+  .hero h1{animation:heroUp .8s .15s both}
+  .hero p.lead{animation:heroUp .8s .30s both}
+  .hero .btnrow{animation:heroUp .8s .44s both}
+  .hero .assure{animation:heroUp .8s .56s both}
+  .hero-visual{animation:heroUp .9s .40s both}
+  @keyframes heroUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:none}}
+  /* gentle float on passport card (desktop only) */
+  @keyframes floaty{0%,100%{transform:translateY(0) rotate(1.5deg)}50%{transform:translateY(-9px) rotate(1.5deg)}}
+  /* hover lift */
+  .card:hover,.sector:hover{transform:translateY(-5px);box-shadow:0 16px 38px rgba(10,26,47,.11)}
+  .aud:hover{transform:translateY(-4px)}
+}
+@media (min-width:901px) and (prefers-reduced-motion: no-preference){
+  .pp{animation:floaty 6.5s ease-in-out 1.4s infinite}
+}
+
+/* ---- RESPONSIVE ---- */
+@media(max-width:1000px){
+  .c4{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:900px){
+  .wrap{padding:0 22px}
+  .hero-inner{grid-template-columns:1fr;padding-top:48px;padding-bottom:52px;gap:32px}.hero h1{font-size:38px}
+  .c3,.c2{grid-template-columns:1fr}.fgrid{grid-template-columns:1fr 1fr}
+  .final{padding:38px 24px}.sector-grid{grid-template-columns:1fr}.modal-card{padding:24px}
+  .pp{transform:none;max-width:420px;margin:0 auto}
+}
+@media(max-width:600px){
+  section.blk{padding:50px 0}
+  .hero{}.hero h1{font-size:30px}.hero p.lead{font-size:16px}
+  .hero .btnrow{width:100%}.hero .btnrow .btn{flex:1;justify-content:center}
+  .c4{grid-template-columns:1fr}
+  .center{margin-bottom:34px}.center h2{font-size:25px}.center p{font-size:15px}
+  .stat{font-size:32px}
+  .checker{padding:24px}.checker h2{font-size:23px}.ck-num{font-size:42px}
+  .ck-form select,.ck-form input{min-width:0;width:100%}.ck-form .btn{width:100%;justify-content:center}
+  .final{padding:32px 20px}.final h2{font-size:25px}
+  .final-form input{min-width:0;width:100%}.final-form .btn{width:100%;justify-content:center}
+  .fgrid{grid-template-columns:1fr;gap:24px}
+  .trust .wrap{gap:12px 16px;font-size:12px;padding:16px 22px}
+  .aud{padding:26px}
+  .nav{height:60px}.brand span{font-size:20px}.brand svg{width:34px;height:34px}
+  .navcta .btn{padding:10px 16px;font-size:14px}
+  .sector{padding:16px}
+  .modal-card{padding:22px}.m-title{font-size:20px}
+}
+@media(max-width:380px){
+  .hero h1{font-size:26px}.wrap{padding:0 18px}
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="wrap nav">
+    <div class="brand">
+      <svg viewBox="0 0 44 44" fill="none"><rect width="44" height="44" rx="12" fill="#0FB5A6"/><path d="M14 22a8 8 0 1 0 8-8" stroke="#04211d" stroke-width="3.4" stroke-linecap="round"/><circle cx="22" cy="14" r="2.6" fill="#04211d"/></svg>
+      <span>evoyt</span>
+    </div>
+    <nav class="navlinks">
+      <a href="#how">How it works</a>
+      <a href="#exporters">For exporters</a>
+      <a href="#sectors">Sectors</a>
+      <a href="#checker">Am I affected?</a>
+    </nav>
+    <div class="navcta">
+      <a class="btn btn-ghost ghost" href="#how">How it works</a>
+      <a class="btn btn-primary" href="#cta">Book a demo</a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <div class="eyebrow">Digital Product Passports</div>
+      <h1>Every product,<br>passport-ready.</h1>
+      <p class="lead">evoyt turns messy supply-chain data into compliant, verifiable digital product passports — so manufacturers and brands are EU-ready in weeks, not years.</p>
+      <div class="btnrow">
+        <a class="btn btn-primary" href="#cta">Book a demo</a>
+        <a class="btn btn-white" href="#how">See how it works</a>
+      </div>
+      <div class="assure"><span style="color:#5EE6D5;font-weight:600">Tamper-proof &amp; independently verifiable.</span> Built to EN 18219 · GS1 · ISO 27001 · GDPR</div>
+    </div>
+    <div class="hero-visual">
+      <div class="pp">
+        <div class="pp-top">
+          <div><div style="font-size:11px;letter-spacing:.1em;opacity:.7">DIGITAL PRODUCT PASSPORT</div><div style="font-family:'Space Grotesk';font-weight:600;font-size:16px">Organic Cotton Tee</div></div>
+          <div class="qr"></div>
+        </div>
+        <div class="pp-body">
+          <div class="pp-row"><span class="k">Product ID</span><span class="v">01·0950600·13</span></div>
+          <div class="pp-row"><span class="k">Fibre composition</span><span class="v">100% Cotton</span></div>
+          <div class="pp-row"><span class="k">Origin</span><span class="v">Surat, IN</span></div>
+          <div class="pp-row"><span class="k">Carbon footprint</span><span class="v">4.2 kg CO₂e</span></div>
+          <div class="pp-row" style="border-bottom:none"><span class="k">Recycled content</span><span class="v">18%</span></div>
+          <span class="pp-badge">● EU DPP compliant</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust"><div class="wrap">
+  <span>Built on open standards:</span>
+  <span><b>EN 18219 / 18220</b></span><span><b>GS1 Digital Link</b></span><span><b>W3C Verifiable Credentials</b></span><span><b>EPCIS 2.0</b></span><span><b>ISO 27001</b></span><span><b>GDPR</b></span>
+</div></div>
+
+<!-- PROBLEM -->
+<section class="blk band">
+  <div class="wrap">
+    <div class="center"><div class="eyebrow">The problem</div><h2>Compliance is coming. Most supply chains aren't ready.</h2><p>EU regulation makes product passports mandatory — but the data lives in spreadsheets, emails and tier-2/3 suppliers who've never gone digital.</p></div>
+    <div class="cards c3">
+      <div class="card"><div class="stat">81%<small>of companies lack the structured lifecycle data DPPs require*</small></div></div>
+      <div class="card"><div class="stat">2027<small>textile &amp; battery passport deadlines begin to bite</small></div></div>
+      <div class="card"><div class="stat">18–36<small>months typical to get DPP-ready without the right tool</small></div></div>
+    </div>
+    <p style="text-align:center;color:var(--muted);font-size:12.5px;margin-top:16px">*KPMG 2026 European DPP Readiness Survey (illustrative).</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="blk" id="how">
+  <div class="wrap">
+    <div class="center"><div class="eyebrow">How evoyt works</div><h2>From scattered data to a compliant passport</h2><p>Four steps. Your suppliers upload once — evoyt handles the standards, verification and hosting.</p></div>
+    <div class="cards c4">
+      <div class="card"><div class="step-n">01</div><h3>Capture</h3><p>Suppliers add certificates, composition and test data via a dead-simple mobile/WhatsApp-grade flow — in their language.</p></div>
+      <div class="card"><div class="step-n">02</div><h3>Verify</h3><p>evoyt structures and validates data into the EU schema — secured with blockchain-backed, tamper-proof verifiable credentials.</p></div>
+      <div class="card"><div class="step-n">03</div><h3>Generate</h3><p>A unique ID + QR/Data Matrix passport is created to EN 18219/18220 and GS1 standards.</p></div>
+      <div class="card"><div class="step-n">04</div><h3>Share</h3><p>Buyers, regulators and consumers scan to see the right view — hosted in the EU, for the product's life.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- AUDIENCES -->
+<section class="blk band" id="exporters">
+  <div class="wrap">
+    <div class="center"><div class="eyebrow">Who it's for</div><h2>One platform, two jobs to be done</h2></div>
+    <div class="cards c2">
+      <div class="aud exp">
+        <h3>For exporters &amp; manufacturers</h3>
+        <p class="lead2">Keep selling into the EU. Turn compliance from a blocker into a checkbox.</p>
+        <ul>
+          <li>EU-ready passports for textiles, batteries &amp; more</li>
+          <li>Effortless tier-2/3 supplier data capture</li>
+          <li>Managed &quot;done-for-you&quot; option for low-tech teams</li>
+        </ul>
+        <a class="btn btn-primary" href="#cta">Get EU-ready</a>
+      </div>
+      <div class="aud brand">
+        <h3>For brands &amp; retailers</h3>
+        <p class="lead2">Prove your product story — and turn every scan into a customer relationship.</p>
+        <ul>
+          <li>Transparency &amp; green-claims compliance</li>
+          <li>Resale, warranty &amp; ownership transfer</li>
+          <li>Scan-to-CRM engagement &amp; new revenue</li>
+        </ul>
+        <a class="btn btn-white" href="#cta">Explore for brands</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SECTORS -->
+<section class="blk" id="sectors">
+  <div class="wrap">
+    <div class="center"><div class="eyebrow">Solutions by sector</div><h2>Built for the deadlines that matter first</h2></div>
+    <div class="cards c3">
+      <div class="sector"><span class="tag">2027</span><div><h3 style="font-size:17px;margin-bottom:4px">Textiles &amp; apparel</h3><p style="font-size:13.5px;color:#455366">Fibre composition, chemical compliance, traceability — ready for the EU textile delegated act.</p></div></div>
+      <div class="sector"><span class="tag">Feb 2027</span><div><h3 style="font-size:17px;margin-bottom:4px">Batteries</h3><p style="font-size:13.5px;color:#455366">EV, LMT &amp; industrial battery passports to EU Battery Regulation + India's 2026 framework.</p></div></div>
+      <div class="sector"><span class="tag">Next</span><div><h3 style="font-size:17px;margin-bottom:4px">Leather, chemicals &amp; more</h3><p style="font-size:13.5px;color:#455366">Expanding as ESPR delegated acts roll out across product groups.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CHECKER -->
+<section class="blk band" id="checker">
+  <div class="wrap">
+    <div class="checker">
+      <div class="eyebrow" style="color:#5EE6D5">30-second deadline check</div>
+      <h2>How much time do you really have?</h2>
+      <p class="sub">Getting DPP-ready takes <b style="color:#fff">18–36 months</b>. Pick your product to see the deadline counting down — and whether you're already inside the danger zone.</p>
+      <div class="ck-form">
+        <select id="ck-sector">
+          <option value="">Select your product…</option>
+          <option value="battery">Batteries (EV / industrial)</option>
+          <option value="textile">Textiles / apparel</option>
+          <option value="leather">Leather goods</option>
+          <option value="chemical">Chemicals</option>
+          <option value="other">Other / not sure</option>
+        </select>
+        <select id="ck-eu">
+          <option value="">Do you sell into the EU?</option>
+          <option value="yes">Yes, we sell in the EU</option>
+          <option value="plan">Planning to</option>
+          <option value="no">No, EU only maybe later</option>
+        </select>
+        <button class="btn btn-primary" onclick="runCheck()">Show my deadline</button>
+      </div>
+
+      <div class="ck-result" id="ck-result">
+        <div class="ck-head">
+          <span class="ck-pill" id="ck-pill">Act now</span>
+          <span class="ck-deadline" id="ck-deadline"></span>
+        </div>
+        <div class="ck-count">
+          <div class="ck-num" id="ck-days">—</div>
+          <div class="ck-lbl">days until your EU deadline</div>
+        </div>
+        <div class="ck-bar"><div class="ck-bar-fill" id="ck-fill"></div><div class="ck-bar-marker" id="ck-marker" title="Deadline"></div></div>
+        <div class="ck-bar-legend"><span>Today</span><span>Prep needed: ~18–36 months</span><span>Deadline</span></div>
+        <p class="ck-msg" id="ck-msg"></p>
+        <a class="btn btn-primary" id="ck-cta" href="#cta" style="margin-top:6px">Map my fastest path →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FINAL CTA -->
+<section class="blk" id="cta">
+  <div class="wrap">
+    <div class="final">
+      <h2>Get your first passport live this quarter.</h2>
+      <p>Drop your email and we'll map your fastest path to EU compliance — takes 30 seconds.</p>
+      <form class="final-form" onsubmit="return startFromEmail(event)">
+        <input type="email" id="final-email" placeholder="you@company.com" aria-label="Your email" required>
+        <button class="btn btn-primary" type="submit">Book a demo →</button>
+      </form>
+      <div class="final-alt"><a href="#how">or see how it works first</a></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="wrap">
+    <div class="fgrid">
+      <div>
+        <div class="brand fbrand" style="margin-bottom:12px">
+          <svg viewBox="0 0 44 44" width="34" height="34" fill="none"><rect width="44" height="44" rx="12" fill="#0FB5A6"/><path d="M14 22a8 8 0 1 0 8-8" stroke="#04211d" stroke-width="3.4" stroke-linecap="round"/><circle cx="22" cy="14" r="2.6" fill="#04211d"/></svg>
+          <span>evoyt</span>
+        </div>
+        <p style="max-width:280px;color:#8598ae">The trusted envoy for every product's journey. Digital product passports, made EU-ready.</p>
+      </div>
+      <div><h5>Product</h5><a href="#how">How it works</a><a href="#exporters">For exporters</a><a href="#sectors">Sectors</a><a href="#checker">Am I affected?</a></div>
+      <div><h5>Company</h5><a href="#">About</a><a href="#">Trust &amp; security</a><a href="#">Careers</a><a href="mailto:hello@evoyt.com">Contact</a></div>
+      <div><h5>Legal</h5><a href="#">Privacy</a><a href="#">Terms</a><a href="#">DPA</a><a href="#">Cookies</a></div>
+    </div>
+    <div class="fbot">
+      <span>© 2026 evoyt. All rights reserved.</span>
+      <span>Made in Gujarat, India · Building for the world.</span>
+    </div>
+  </div>
+</footer>
+
+<!-- LEAD MODAL -->
+<div class="modal-overlay" id="lead-modal" onclick="if(event.target===this)closeModal()">
+  <div class="modal-card">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">&times;</button>
+    <div class="modal-progress"><span id="mp-fill"></span></div>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<script>
+// ---------- LEAD CAPTURE FLOW ----------
+var lead={name:'',email:'',sector:'',sectorLabel:'',answers:{}};
+var SECTORS=[
+  {id:'battery',name:'Batteries',note:'EV · industrial · LMT'},
+  {id:'textile',name:'Textiles / apparel',note:'Fibre · chemicals · trace'},
+  {id:'leather',name:'Leather goods',note:'Sourcing & compliance'},
+  {id:'chemical',name:'Chemicals',note:'Substances & safety data'},
+  {id:'other',name:'Other / not sure',note:"We'll help you scope it"}
+];
+var Q={
+  textile:[
+    {id:'role',q:'Which best describes you?',opts:['Brand / retailer','Manufacturer / exporter','Mill / material supplier']},
+    {id:'issue',q:'Your biggest DPP challenge right now?',opts:['Collecting supplier data','Fibre & chemical compliance',"Don't know where to start",'Integrating with our systems']},
+    {id:'scale',q:'How many products need passports?',opts:['Under 100','100–1,000','1,000–10,000','10,000+']},
+    {id:'need',q:'What are you looking for?',opts:['Full compliance platform','Supplier data capture','Done-for-you service','Just exploring']},
+    {id:'timeline',q:'When do you need to be ready?',opts:['ASAP','Within 12 months','12–24 months','Not sure yet']}
+  ],
+  battery:[
+    {id:'type',q:'What kind of batteries?',opts:['EV batteries','Industrial (>2 kWh)','Light means of transport','Portable']},
+    {id:'role',q:'Your role in the chain?',opts:['Manufacturer','Importer','OEM / brand','Recycler']},
+    {id:'issue',q:'Biggest challenge?',opts:['Meeting the Feb 2027 deadline','Carbon-footprint data','Supply-chain due diligence','State-of-health data']},
+    {id:'need',q:'What are you looking for?',opts:['Compliance platform','Data-collection help','Consulting / guidance','Just exploring']},
+    {id:'timeline',q:'How urgent is this?',opts:['Very — deadline looms','Planning ahead','Exploring options']}
+  ],
+  leather:[
+    {id:'role',q:'Which best describes you?',opts:['Brand','Manufacturer / exporter','Tannery / supplier']},
+    {id:'issue',q:'Biggest concern?',opts:['Responsible sourcing proof','Supplier data collection','Traceability','Where to start']},
+    {id:'need',q:'What are you looking for?',opts:['Compliance platform','Supplier data capture','Done-for-you service','Exploring']},
+    {id:'timeline',q:'Timeline to be ready?',opts:['ASAP','Within 12 months','12–24 months','Not sure']}
+  ],
+  chemical:[
+    {id:'role',q:'Which best describes you?',opts:['Manufacturer','Importer / distributor','Formulator','Other']},
+    {id:'issue',q:'Biggest challenge?',opts:['Substance / SVHC data','Safety documentation','Supply-chain traceability','Where to start']},
+    {id:'need',q:'What are you looking for?',opts:['Compliance platform','Data collection help','Consulting','Exploring']},
+    {id:'timeline',q:'How urgent?',opts:['ASAP','Within 12 months','12–24 months','Not sure']}
+  ],
+  other:[
+    {id:'role',q:'What best describes your business?',opts:['Manufacturer / exporter','Brand / retailer','Supplier','Other']},
+    {id:'eu',q:'Do you sell into the EU?',opts:['Yes','Planning to','Not yet']},
+    {id:'issue',q:'What prompted you to look at DPP?',opts:['A customer / buyer asked','Upcoming regulation','Sustainability goals','Just researching']},
+    {id:'need',q:'What are you looking for?',opts:['Compliance platform','Data collection help','Guidance','Exploring']},
+    {id:'timeline',q:'Timeline?',opts:['ASAP','Within 12 months','12–24 months','Not sure']}
+  ]
+};
+var _step='contact';
+
+function openModal(prefillEmail){
+  if(prefillEmail){lead.email=prefillEmail;}
+  document.getElementById('lead-modal').classList.add('show');
+  document.body.style.overflow='hidden';
+  renderContact();
+}
+function closeModal(){
+  document.getElementById('lead-modal').classList.remove('show');
+  document.body.style.overflow='';
+}
+function setProg(p){document.getElementById('mp-fill').style.width=p+'%';}
+function esc(s){return (s||'').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
+
+function renderContact(){
+  _step='contact'; setProg(25);
+  document.getElementById('modal-body').innerHTML=
+    '<div class="m-eyebrow">Book a demo · Step 1 of 3</div>'+
+    '<div class="m-title">Let’s get you EU-ready</div>'+
+    '<div class="m-sub">Tell us who you are and we’ll tailor everything to your situation.</div>'+
+    '<div class="m-field"><label>Your name</label><input class="m-input" id="f-name" placeholder="Jane Patel" value="'+esc(lead.name)+'"></div>'+
+    '<div class="m-field"><label>Work email</label><input class="m-input" id="f-email" type="email" placeholder="you@company.com" value="'+esc(lead.email)+'"></div>'+
+    '<div class="m-err" id="f-err"></div>'+
+    '<input type="text" id="f-botcheck" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;height:0;width:0">'+
+    '<div class="m-actions"><span></span><button class="btn btn-primary" onclick="submitContact()">Continue →</button></div>';
+  var em=document.getElementById('f-email'); if(lead.email && !lead.name){document.getElementById('f-name').focus();}
+}
+function submitContact(){
+  var n=document.getElementById('f-name').value.trim();
+  var e=document.getElementById('f-email').value.trim();
+  var ok=/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e);
+  if(!n){document.getElementById('f-err').textContent='Please enter your name.';return;}
+  if(!ok){document.getElementById('f-err').textContent='Please enter a valid email address.';return;}
+  var bc=document.getElementById('f-botcheck'); lead.botcheck=bc?bc.value:'';
+  lead.name=n; lead.email=e; renderSector();
+}
+
+function renderSector(){
+  _step='sector'; setProg(55);
+  var grid=SECTORS.map(function(s){
+    return '<button class="sector-btn" onclick="chooseSector(\''+s.id+'\',\''+s.name.replace(/'/g,"")+'\')"><b>'+s.name+'</b><small>'+s.note+'</small></button>';
+  }).join('');
+  document.getElementById('modal-body').innerHTML=
+    '<div class="m-eyebrow">Book a demo · Step 2 of 3</div>'+
+    '<div class="m-title">What do you make?</div>'+
+    '<div class="m-sub">We’ll ask a few quick, relevant questions based on your sector.</div>'+
+    '<div class="sector-grid">'+grid+'</div>'+
+    '<div class="m-actions"><button class="m-back" onclick="renderContact()">← Back</button><span></span></div>';
+}
+function chooseSector(id,label){lead.sector=id; lead.sectorLabel=label; lead.answers={}; renderQuestions();}
+
+function renderQuestions(){
+  _step='questions'; setProg(85);
+  var qs=Q[lead.sector]||Q.other;
+  var blocks=qs.map(function(item){
+    var chips=item.opts.map(function(o){
+      var sel=(lead.answers[item.id]===o)?' sel':'';
+      return '<span class="qchip'+sel+'" data-q="'+item.id+'" onclick="pick(this,\''+item.id+'\')">'+o+'</span>';
+    }).join('');
+    return '<div class="q-block"><div class="ql">'+item.q+'</div><div class="chipset">'+chips+'</div></div>';
+  }).join('');
+  document.getElementById('modal-body').innerHTML=
+    '<div class="m-eyebrow">Book a demo · Step 3 of 3 · '+esc(lead.sectorLabel)+'</div>'+
+    '<div class="m-title">A few quick questions</div>'+
+    '<div class="m-sub">Tap the answers that fit best — this shapes your demo.</div>'+
+    blocks+
+    '<div class="q-block"><div class="ql">Anything specific you’re hoping we solve? (optional)</div>'+
+    '<textarea class="m-input" id="f-notes" rows="2" placeholder="e.g. we need to onboard 40 fabric suppliers before our EU buyer’s deadline">'+esc(lead.answers._notes||'')+'</textarea></div>'+
+    '<div class="m-err" id="q-err"></div>'+
+    '<div style="font-size:12px;color:var(--muted);margin-top:2px">By submitting, you agree to be contacted about evoyt and to our <a href="#" style="color:var(--teal-600);text-decoration:underline">Privacy Policy</a>.</div>'+
+    '<div class="m-actions"><button class="m-back" onclick="renderSector()">← Back</button><button class="btn btn-primary" id="lead-submit" onclick="submitLead()">Submit →</button></div>';
+}
+function pick(el,qid){
+  var group=document.querySelectorAll('.qchip[data-q="'+qid+'"]');
+  group.forEach(function(c){c.classList.remove('sel');});
+  el.classList.add('sel'); lead.answers[qid]=el.textContent;
+}
+function submitLead(){
+  var qs=Q[lead.sector]||Q.other;
+  var answered=qs.filter(function(i){return lead.answers[i.id];}).length;
+  var notes=document.getElementById('f-notes'); if(notes)lead.answers._notes=notes.value.trim();
+  if(answered<Math.min(3,qs.length)){document.getElementById('q-err').textContent='Please answer at least the first few questions.';return;}
+  sendLead();
+}
+function renderSuccess(){
+  _step='done'; setProg(100);
+  // Build a mailto so the submission actually reaches you until a form backend is connected.
+  var lines=['Name: '+lead.name,'Email: '+lead.email,'Sector: '+lead.sectorLabel,''];
+  var qs=Q[lead.sector]||Q.other;
+  qs.forEach(function(i){ if(lead.answers[i.id]) lines.push(i.q+' '+lead.answers[i.id]); });
+  if(lead.answers._notes) lines.push('','Notes: '+lead.answers._notes);
+  var body=encodeURIComponent(lines.join('\n'));
+  var subj=encodeURIComponent('Demo request — '+lead.name+' ('+lead.sectorLabel+')');
+  var mailto='mailto:hello@evoyt.com?subject='+subj+'&body='+body;
+  document.getElementById('modal-body').innerHTML=
+    '<div class="m-success"><div class="tick">✓</div>'+
+    '<div class="m-title">Thanks, '+esc(lead.name.split(' ')[0])+'!</div>'+
+    '<div class="m-sub" style="margin-bottom:18px">We’ve got what we need. Our team will reach out to <b>'+esc(lead.email)+'</b> within one business day with a tailored path for '+esc(lead.sectorLabel)+'.</div>'+
+    '<a class="btn btn-primary" href="'+mailto+'">Send us your details now</a>'+
+    '<div style="margin-top:14px"><button class="m-back" onclick="closeModal()">Close</button></div></div>';
+  // TODO: replace the mailto with a POST to your form backend (Formspree, Netlify Forms, HubSpot, etc.)
+  // Example: fetch('/api/lead',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(lead)});
+}
+
+var WEB3FORMS_KEY='44bf6087-dfd6-4132-80fb-e7e51f124c04';
+function buildAnswersText(){
+  var qs=Q[lead.sector]||Q.other; var lines=[];
+  qs.forEach(function(i){ if(lead.answers[i.id]) lines.push(i.q+' '+lead.answers[i.id]); });
+  if(lead.answers._notes) lines.push('Notes: '+lead.answers._notes);
+  return lines.join('\n');
+}
+function sendLead(){
+  var btn=document.getElementById('lead-submit');
+  if(btn){btn.textContent='Sending...'; btn.style.pointerEvents='none'; btn.style.opacity='0.7';}
+  var payload={access_key:WEB3FORMS_KEY,subject:'New evoyt lead: '+lead.name+' ('+lead.sectorLabel+')',from_name:'evoyt website',name:lead.name,email:lead.email,sector:lead.sectorLabel,answers:buildAnswersText(),botcheck:(lead.botcheck||'')};
+  fetch('https://api.web3forms.com/submit',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify(payload)})
+    .then(function(r){return r.json();}).then(function(d){ if(d&&d.success){renderSuccess();}else{renderError();} })
+    .catch(function(){renderError();});
+}
+function renderSuccess(){
+  _step='done'; setProg(100);
+  document.getElementById('modal-body').innerHTML=
+    '<div class="m-success"><div class="tick">&#10003;</div>'+
+    '<div class="m-title">Thanks, '+esc(lead.name.split(' ')[0])+'!</div>'+
+    '<div class="m-sub" style="margin-bottom:18px">We have your details. Our team will reach out to <b>'+esc(lead.email)+'</b> within one business day with a tailored path for '+esc(lead.sectorLabel)+'.</div>'+
+    '<button class="btn btn-primary" onclick="closeModal()">Done</button></div>';
+}
+function renderError(){
+  var lines=['Name: '+lead.name,'Email: '+lead.email,'Sector: '+lead.sectorLabel,'',buildAnswersText()];
+  var mailto='mailto:hello@evoyt.com?subject='+encodeURIComponent('Demo request - '+lead.name)+'&body='+encodeURIComponent(lines.join('\n'));
+  var btn=document.getElementById('lead-submit'); if(btn){btn.textContent='Submit';btn.style.pointerEvents='';btn.style.opacity='';}
+  document.getElementById('modal-body').innerHTML=
+    '<div class="m-success"><div class="tick" style="background:#FDECEC;color:#DC2626">!</div>'+
+    '<div class="m-title">Could not send just now</div>'+
+    '<div class="m-sub" style="margin-bottom:18px">Please try again, or email us directly and we will take it from there.</div>'+
+    '<a class="btn btn-primary" href="'+mailto+'">Email us instead</a>'+
+    '<div style="margin-top:14px"><button class="m-back" onclick="renderQuestions()">Try again</button></div></div>';
+}
+
+// Open modal from any "#cta" link and from the inline final-email form.
+document.addEventListener('DOMContentLoaded',function(){
+  document.querySelectorAll('a[href="#cta"]').forEach(function(a){
+    a.addEventListener('click',function(ev){ev.preventDefault(); openModal();});
+  });
+});
+function startFromEmail(ev){
+  ev.preventDefault();
+  var e=document.getElementById('final-email').value.trim();
+  openModal(e);
+  return false;
+}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});
+</script>
+
+<script>
+// ---------- SCROLL ANIMATIONS ----------
+(function(){
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var hdr=document.querySelector('header');
+  function onScroll(){ if(hdr) hdr.classList.toggle('scrolled', window.scrollY>8); }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  if(reduce) return;
+  var els=document.querySelectorAll('.center, .card, .aud, .sector, .checker, .final, .trust .wrap');
+  els.forEach(function(el){el.classList.add('reveal');});
+  document.querySelectorAll('.cards').forEach(function(grid){
+    Array.prototype.forEach.call(grid.children,function(ch,i){
+      if(ch.classList.contains('reveal')) ch.style.transitionDelay=(i*90)+'ms';
+    });
+  });
+  if(!('IntersectionObserver' in window)){ els.forEach(function(el){el.classList.add('in');}); return; }
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:0.12, rootMargin:'0px 0px -40px 0px'});
+  els.forEach(function(el){io.observe(el);});
+})();
+</script>
+
+<script>
+// Representative EU deadlines (illustrative; verify against official delegated acts).
+var DEADLINES={
+  battery:{date:'2027-02-18',label:'EU Battery Regulation — battery passport'},
+  textile:{date:'2028-01-01',label:'EU textile delegated act (indicative)'},
+  leather:{date:'2029-01-01',label:'ESPR expansion (indicative)'},
+  chemical:{date:'2029-06-01',label:'ESPR expansion (indicative)'},
+  other:{date:'2028-06-01',label:'ESPR rollout across product groups'}
+};
+var PREP_MIN_DAYS=548;
+var PREP_MAX_DAYS=1095;
+
+function fmtDate(d){return d.toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}
+
+function runCheck(){
+  var s=document.getElementById('ck-sector').value;
+  var e=document.getElementById('ck-eu').value;
+  var box=document.getElementById('ck-result');
+  var elDays=document.getElementById('ck-days'), elMsg=document.getElementById('ck-msg'),
+      elPill=document.getElementById('ck-pill'), elDl=document.getElementById('ck-deadline'),
+      elFill=document.getElementById('ck-fill'), elMark=document.getElementById('ck-marker'),
+      elCta=document.getElementById('ck-cta');
+
+  if(!s||!e){ box.className="ck-result show"; elDl.textContent=""; elDays.textContent="—";
+    elDays.className="ck-num"; elPill.className="ck-pill grey"; elPill.textContent="Answer both";
+    elMsg.innerHTML="Select your product and EU answer to see your countdown."; elFill.style.width="0"; return; }
+
+  var info=DEADLINES[s]||DEADLINES.other;
+  var target=new Date(info.date+'T00:00:00');
+  var today=new Date();
+  var days=Math.max(0,Math.round((target-today)/86400000));
+  var months=Math.round(days/30.4);
+
+  elDl.textContent=info.label+" · "+fmtDate(target);
+  elDays.textContent=days.toLocaleString();
+
+  var pct=Math.min(100,Math.max(6,Math.round((1-(days/PREP_MAX_DAYS))*100)));
+  elFill.style.width=pct+"%";
+  elMark.style.right="0";
+
+  var msg, numClass;
+  if(e==='no'){
+    numClass="";
+    msg="You may not be in EU scope <i>today</i> — but rules keep expanding and buyers increasingly demand passports. Building now is a <b>competitive edge</b>, not a cost. Let's map a no-pressure path.";
+    elPill.className="ck-pill grey"; elPill.textContent="Plan ahead";
+  } else if(days<=PREP_MIN_DAYS){
+    numClass="danger";
+    msg="⚠ <b>You're already inside the danger zone.</b> Your deadline is about <b>"+months+" months</b> away, but getting fully DPP-ready typically takes <b>18–36 months</b>. Every week of delay narrows your options — the time to start is <b>today</b>.";
+    elPill.className="ck-pill"; elPill.textContent="Act now";
+  } else if(days<=PREP_MAX_DAYS){
+    numClass="warn";
+    msg="Your deadline is about <b>"+months+" months</b> out — right inside the <b>18–36 month</b> prep window. Start now and you'll be comfortably ready; wait, and it gets tight fast.";
+    elPill.className="ck-pill amber"; elPill.textContent="Start soon";
+  } else {
+    numClass="warn";
+    msg="You have roughly <b>"+months+" months</b> — enough time to do this properly and even turn passports into a <b>sales advantage</b>. The earliest movers win the smoothest transition.";
+    elPill.className="ck-pill amber"; elPill.textContent="Get ahead";
+  }
+  elDays.className="ck-num "+numClass;
+  elMsg.innerHTML=msg;
+  elCta.textContent = (e==='no') ? "Show me the upside →" : "Map my fastest path →";
+  box.className="ck-result show";
+}
+</script>
+</body>
+</html>

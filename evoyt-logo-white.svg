@@ -1,0 +1,6 @@
+<svg width="200" height="56" viewBox="0 0 200 56" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="evoyt">
+  <rect x="4" y="6" width="44" height="44" rx="12" fill="#0FB5A6"/>
+  <path d="M18 28a8 8 0 1 0 8-8" stroke="#04211d" stroke-width="3.4" stroke-linecap="round"/>
+  <circle cx="26" cy="20" r="2.6" fill="#04211d"/>
+  <text x="62" y="38" font-family="'Space Grotesk','Segoe UI',sans-serif" font-size="34" font-weight="700" letter-spacing="-1.2" fill="#FFFFFF">evoyt</text>
+</svg>
